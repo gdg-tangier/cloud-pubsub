@@ -26,7 +26,7 @@ before_script:
   # Add gcloud to $PATH
   - source /home/travis/google-cloud-sdk/path.bash.inc
   - gcloud version
-  - ./emulator.sh
+  - gcloud beta emulators pubsub start && sleep 20
   - export PUBSUB_EMULATOR_HOST=localhost:8085
 
 script:
