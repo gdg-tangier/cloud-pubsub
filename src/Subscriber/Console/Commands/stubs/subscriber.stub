@@ -1,0 +1,43 @@
+<?php
+
+namespace DummyNamespace;
+
+use GDGTangier\PubSub\Subscriber\PubSubJob;
+use GDGTangier\PubSub\Subscriber\Traits\JobHandler;
+
+class DummyClass
+{
+    use JobHandler;
+
+    /**
+     * @var mixed
+     */
+    public $payload;
+
+    /**
+     * @var \GDGTangier\PubSub\Subscriber\PubSubJob
+     */
+    public $job;
+
+    /**
+     * DummyClass constructor.
+     *
+     * @param \GDGTangier\PubSub\Subscriber\PubSubJob $job
+     * @param $payload
+     */
+    public function __construct(PubSubJob $job, $payload)
+    {
+        $this->job = $job;
+        $this->payload = $payload;
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        //
+    }
+}

@@ -1,0 +1,58 @@
+{
+    "name": "gdg-tangier/cloud-pubsub",
+    "description": "Google Cloud Pub/Sub for laravel",
+    "keywords": [
+        "GDG",
+        "php",
+        "Google",
+        "laravel",
+        "framework",
+        "publisher",
+        "subscriber",
+        "GDG Tangier",
+        "gdg-tangier",
+        "Google Cloud",
+        "event driven",
+        "laravel queue",
+        "microservices",
+        "laravel Pub/Sub",
+        "Google Cloud Pub/Sub",
+        "Google Cloud Platform",
+        "Google Developer Group",
+        "event driven microservices",
+        "event driven microservices with laravel"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Houssain Amrani",
+            "email": "amranidev@gmail.com"
+        }
+    ],
+    "require": {
+        "google/cloud-pubsub": "^1.16"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "GDGTangier\\PubSub\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GDGTangier\\PubSub\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GDGTangier\\PubSub\\CloudPubSubServiceProvider"
+            ],
+            "aliases": {
+                "Publisher": "GDGTangier\\PubSub\\Publisher\\PublisherFacade"
+            }
+        }
+    }
+}
