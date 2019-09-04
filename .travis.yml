@@ -14,12 +14,23 @@ matrix:
     - php: 7.3
       env: TESTBENCH_VERSION=3.8.3
 
+cache:
+  directories:
+    - "$HOME/google-cloud-sdk/"
+
 before_script:
   - travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest
   - travis_retry composer require --no-interaction --prefer-stable --no-suggest --update-with-dependencies --dev "orchestra/testbench:${TESTBENCH_VERSION}"
-  - ./emulator.sh
+  - gcloud version || true
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+  # Add gcloud to $PATH
+  - source /home/travis/google-cloud-sdk/path.bash.inc
+  - gcloud version
+  - gcloud beta emulators pubsub start &> /dev/null &
+  - sleep 20
   - export PUBSUB_EMULATOR_HOST=localhost:8085
 
 script:
   - composer validate
   - vendor/bin/phpunit
+  
