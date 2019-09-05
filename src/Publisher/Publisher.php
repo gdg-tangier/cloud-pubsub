@@ -28,10 +28,11 @@ class Publisher
      *
      * @param string $data
      * @param string $topicName
-     * @param array $attributes
+     * @param array  $attributes
+     *
+     * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
      *
      * @return array
-     * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
      */
     public function publish($data, $topicName, $attributes = [])
     {
@@ -49,7 +50,7 @@ class Publisher
      * Prepare message attributes.
      *
      * @param string $topic
-     * @param array $attributes
+     * @param array  $attributes
      *
      * @return array
      */
@@ -65,8 +66,9 @@ class Publisher
      *
      * @param string $topicName
      *
-     * @return mixed
      * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
+     *
+     * @return mixed
      */
     protected function getTopicName($topicName)
     {
@@ -80,7 +82,7 @@ class Publisher
             return $topic;
         }
 
-        Throw new TopicNotFound("Event [{$topicName}] Not Found");
+        throw new TopicNotFound("Event [{$topicName}] Not Found");
     }
 
     /**

@@ -7,7 +7,7 @@ class GetMessage
     /**
      * Handle the incoming message.
      *
-     * @param array $messages
+     * @param array    $messages
      * @param \Closure $next
      *
      * @return mixed|null
@@ -15,7 +15,7 @@ class GetMessage
     public function handle($messages, \Closure $next)
     {
         if (count($messages) == 0) {
-            return null;
+            return;
         }
 
         /** @var \Google\Cloud\PubSub\Message $message */

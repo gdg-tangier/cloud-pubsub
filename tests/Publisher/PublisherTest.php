@@ -34,6 +34,7 @@ class PublisherTest extends \GDGTangier\PubSub\Tests\TestCase
 
     /**
      * @test
+     *
      * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
      */
     public function can_publish_a_message()

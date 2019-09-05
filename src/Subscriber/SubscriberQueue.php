@@ -41,7 +41,7 @@ class SubscriberQueue extends Queue implements QueueContract
     /**
      * Get the size of the queue.
      *
-     * @param  string $queue
+     * @param string $queue
      *
      * @return int
      */
@@ -53,9 +53,9 @@ class SubscriberQueue extends Queue implements QueueContract
     /**
      * Push a new job onto the queue.
      *
-     * @param  string|object $job
-     * @param  mixed $data
-     * @param  string $queue
+     * @param string|object $job
+     * @param mixed         $data
+     * @param string        $queue
      *
      * @return mixed
      */
@@ -67,9 +67,9 @@ class SubscriberQueue extends Queue implements QueueContract
     /**
      * Push a raw payload onto the queue.
      *
-     * @param  string $payload
-     * @param  string $queue
-     * @param  array $options
+     * @param string $payload
+     * @param string $queue
+     * @param array  $options
      *
      * @return mixed
      */
@@ -81,10 +81,10 @@ class SubscriberQueue extends Queue implements QueueContract
     /**
      * Push a new job onto the queue after a delay.
      *
-     * @param  \DateTimeInterface|\DateInterval|int $delay
-     * @param  string|object $job
-     * @param  mixed $data
-     * @param  string $queue
+     * @param \DateTimeInterface|\DateInterval|int $delay
+     * @param string|object                        $job
+     * @param mixed                                $data
+     * @param string                               $queue
      *
      * @return mixed
      */
@@ -96,10 +96,11 @@ class SubscriberQueue extends Queue implements QueueContract
     /**
      * Pop the next job off of the queue.
      *
-     * @param  string $queue
+     * @param string $queue
+     *
+     * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
      *
      * @return \Illuminate\Contracts\Queue\Job|null
-     * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
      */
     public function pop($queue = null)
     {
@@ -116,16 +117,16 @@ class SubscriberQueue extends Queue implements QueueContract
      * @param $queue
      * @param $messages
      *
-     * @return \GDGTangier\PubSub\Subscriber\SubscriberJob|null
      * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
+     *
+     * @return \GDGTangier\PubSub\Subscriber\SubscriberJob|null
      */
     protected function processMessages($queue, $messages)
     {
-
         $message = $this->pipe($messages);
 
         if (is_null($message)) {
-            return null;
+            return;
         }
 
         /** @var \GDGTangier\PubSub\Subscriber\JobsMap $map */

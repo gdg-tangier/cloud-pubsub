@@ -35,8 +35,9 @@ class PublisherManager
      */
     public function connection()
     {
-        if (!$this->connection)
+        if (!$this->connection) {
             $this->connection = $this->resolve();
+        }
 
         return $this->connection;
     }
@@ -49,7 +50,8 @@ class PublisherManager
     protected function resolve()
     {
         $config = $this->getConfig();
-        return (new PublisherConnector)->connect($config);
+
+        return (new PublisherConnector())->connect($config);
     }
 
     /**
