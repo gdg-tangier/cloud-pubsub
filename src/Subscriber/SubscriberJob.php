@@ -62,12 +62,12 @@ class SubscriberJob extends Job implements JobContract
     /**
      * SubscriberJob constructor.
      *
-     * @param \Google\Cloud\PubSub\Message $message
-     * @param \Google\Cloud\PubSub\PubSubClient $client
+     * @param \Google\Cloud\PubSub\Message              $message
+     * @param \Google\Cloud\PubSub\PubSubClient         $client
      * @param \Illuminate\Contracts\Container\Container $container
-     * @param string $connectionName
-     * @param string $queue
-     * @param string $handler
+     * @param string                                    $connectionName
+     * @param string                                    $queue
+     * @param string                                    $handler
      */
     public function __construct(Message $message, PubSubClient $client,
                                 Container $container,
@@ -88,8 +88,9 @@ class SubscriberJob extends Job implements JobContract
     /**
      * Fire the Job.
      *
-     * @return void
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return void
      */
     public function fire()
     {
@@ -98,7 +99,7 @@ class SubscriberJob extends Job implements JobContract
         $this->instance = ($this->container->make($payload['job'],
             [
                 'job'     => $this,
-                'payload' => $payload['data']
+                'payload' => $payload['data'],
             ]
         ));
 
@@ -144,7 +145,7 @@ class SubscriberJob extends Job implements JobContract
      */
     public function attempts()
     {
-        /** @var integer $attempts */
+        /** @var int $attempts */
         $attempts = $this->cache->get($this->message->id());
 
         return $attempts;

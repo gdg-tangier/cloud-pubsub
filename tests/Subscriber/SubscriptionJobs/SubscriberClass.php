@@ -6,7 +6,7 @@ use GDGTangier\PubSub\Subscriber\SubscriberJob;
 use GDGTangier\PubSub\Subscriber\Traits\JobHandler;
 
 /**
- * Class Subscriber
+ * Class Subscriber.
  */
 class SubscriberClass
 {

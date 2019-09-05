@@ -9,14 +9,14 @@ use GDGTangier\PubSub\Tests\Subscriber\SubscriptionJobs\SubscriberClass;
 class SubscriberTest extends \GDGTangier\PubSub\Tests\TestCase
 {
     /**
-     * @var \GDGTangier\PubSub\Publisher\Publisher $publisher
+     * @var \GDGTangier\PubSub\Publisher\Publisher
      */
     public $publisher;
 
     /**
      * @var \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public  $job;
+    public $job;
 
     /**
      * @var \Google\Cloud\PubSub\PubSubClient
@@ -47,6 +47,7 @@ class SubscriberTest extends \GDGTangier\PubSub\Tests\TestCase
 
     /**
      * @test
+     *
      * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
      */
     public function can_work_a_publishable_message()

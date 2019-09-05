@@ -3,9 +3,8 @@
 namespace GDGTangier\PubSub\Subscriber\Traits;
 
 /**
- * Trait JobHandler
+ * Trait JobHandler.
  *
- * @package  GDGTangier\PubSub\Subscriber\Traits
  * @property \GDGTangier\PubSub\Subscriber\SubscriberJob $job
  */
 trait JobHandler

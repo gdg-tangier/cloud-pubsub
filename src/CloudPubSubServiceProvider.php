@@ -47,7 +47,7 @@ class CloudPubSubServiceProvider extends ServiceProvider
     {
         $this->app->afterResolving(QueueManager::class, function (QueueManager $manager) {
             $manager->addConnector('pubsub', function () {
-                return new SubscriberConnector;
+                return new SubscriberConnector();
             });
         });
     }
@@ -88,6 +88,7 @@ class CloudPubSubServiceProvider extends ServiceProvider
     {
         $this->app->singleton('gcloud.subscriber.map', function () {
             $jobs = config('pubsub.subscriptions');
+
             return new JobsMap($jobs);
         });
     }

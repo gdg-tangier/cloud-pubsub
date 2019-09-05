@@ -26,14 +26,16 @@ class JobsMap
      *
      * @param $topic
      *
-     * @return string|boolean
      * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
+     *
+     * @return string|bool
      */
     public function fromTopic($topic)
     {
-        if ($job = $this->jobs->search($topic))
+        if ($job = $this->jobs->search($topic)) {
             return $job;
+        }
 
-        Throw new SubscriberJobNotFound('Subscriber job not found!');
+        throw new SubscriberJobNotFound('Subscriber job not found!');
     }
 }

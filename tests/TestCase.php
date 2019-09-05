@@ -32,6 +32,7 @@ abstract class TestCase extends OrchestraTestCase
             //
         ];
     }
+
     /**
      * @param \Illuminate\Foundation\Application $app
      *
@@ -57,6 +58,7 @@ abstract class TestCase extends OrchestraTestCase
         $config->set('pubsub.subscriptions.'.SubscriberClass::class, self::TOPIC_NAME);
         $config->set('pubsub.events.testTopic', self::TOPIC_NAME);
     }
+
     /**
      * @return \Illuminate\Config\Repository
      */
@@ -64,6 +66,7 @@ abstract class TestCase extends OrchestraTestCase
     {
         /** @var \Illuminate\Config\Repository $config */
         $config = $this->app['config'];
+
         return $config;
     }
 }

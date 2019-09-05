@@ -67,7 +67,7 @@ class PublishMessage extends Command
     protected function initProgressBar()
     {
         $bar = $this->output->createProgressBar(1);
-        $bar->setBarCharacter("<fg=magenta>=</>");
+        $bar->setBarCharacter('<fg=magenta>=</>');
         $bar->setProgressCharacter("\xF0\x9F\x9A\x80");
 
         return $bar;
