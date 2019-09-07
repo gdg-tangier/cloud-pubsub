@@ -15,7 +15,10 @@ class CloudPubSubServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $configPath = __DIR__ . '/../config/pubsub.php';
+        $this->publishes([
+            $configPath => config_path('pubsub.php'),
+        ], 'pubsub');
     }
 
     /**
