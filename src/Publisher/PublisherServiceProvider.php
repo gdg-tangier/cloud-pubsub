@@ -14,7 +14,7 @@ class PublisherServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->commands([PublishMessage::class,]);
+        $this->commands([PublishMessage::class]);
     }
 
     /**
