@@ -3,7 +3,6 @@
 namespace GDGTangier\PubSub\Publisher;
 
 use Google\Cloud\PubSub\PubSubClient;
-use GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound;
 
 class Publisher
 {
@@ -22,7 +21,7 @@ class Publisher
     /**
      * Publisher constructor.
      *
-     * @param \Google\Cloud\PubSub\PubSubClient $client
+     * @param \Google\Cloud\PubSub\PubSubClient      $client
      * @param \GDGTangier\PubSub\Publisher\EventsMap $events
      */
     public function __construct(PubSubClient $client, EventsMap $events)
@@ -38,8 +37,9 @@ class Publisher
      * @param string $event
      * @param array  $attributes
      *
-     * @return array
      * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
+     *
+     * @return array
      */
     public function publish($data, $event, $attributes = [])
     {

@@ -27,8 +27,9 @@ class EventsMap
      *
      * @param string $event
      *
-     * @return mixed
      * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
+     *
+     * @return mixed
      */
     public function formEvent($event)
     {
