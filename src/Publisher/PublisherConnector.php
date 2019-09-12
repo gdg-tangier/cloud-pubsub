@@ -16,9 +16,9 @@ class PublisherConnector
      */
     public function connect($config)
     {
-        $config = getenv('PUBSUB_EMULATOR_HOST') ? [] :
+        $credentials = getenv('PUBSUB_EMULATOR_HOST') ? [] :
             Arr::only($config['credentials'], ['keyFilePath', 'projectId']);
 
-        return new Publisher(new PubSubClient($config));
+        return new Publisher(new PubSubClient($credentials), new EventsMap($config['events']));
     }
 }
