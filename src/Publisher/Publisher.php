@@ -2,6 +2,7 @@
 
 namespace GDGTangier\PubSub\Publisher;
 
+use Google\Cloud\PubSub\PubSubClient;
 use GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound;
 
 class Publisher
@@ -11,32 +12,38 @@ class Publisher
      *
      * @var \Google\Cloud\PubSub\PubSubClient
      */
-    public $client;
+    protected $client;
+
+    /**
+     * @var \GDGTangier\PubSub\Publisher\EventsMap
+     */
+    protected $events;
 
     /**
      * Publisher constructor.
      *
-     * @param \Google\Cloud\PubSub\PubSubClient $pubsubClient
+     * @param \Google\Cloud\PubSub\PubSubClient $client
+     * @param \GDGTangier\PubSub\Publisher\EventsMap $events
      */
-    public function __construct($pubsubClient)
+    public function __construct(PubSubClient $client, EventsMap $events)
     {
-        $this->client = $pubsubClient;
+        $this->client = $client;
+        $this->events = $events;
     }
 
     /**
      * Publish data to the cloud.
      *
      * @param string $data
-     * @param string $topicName
+     * @param string $event
      * @param array  $attributes
      *
-     * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
-     *
      * @return array
+     * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
      */
-    public function publish($data, $topicName, $attributes = [])
+    public function publish($data, $event, $attributes = [])
     {
-        $topicName = $this->getTopicName($topicName);
+        $topicName = $this->events->formEvent($event);
 
         $topic = $this->client->topic($topicName);
 
@@ -59,30 +66,6 @@ class Publisher
         return array_merge($attributes, [
             'TopicName' => $topic,
         ]);
-    }
-
-    /**
-     * Get the topic name.
-     *
-     * @param string $topicName
-     *
-     * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
-     *
-     * @return mixed
-     */
-    protected function getTopicName($topicName)
-    {
-        $events = collect(config('pubsub.events'));
-
-        if ($events->search($topicName)) {
-            return $topicName;
-        }
-
-        if ($topic = $events->get($topicName)) {
-            return $topic;
-        }
-
-        throw new TopicNotFound("Event [{$topicName}] Not Found");
     }
 
     /**
