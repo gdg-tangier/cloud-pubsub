@@ -156,7 +156,7 @@ $publisher->publish('MyDaya', 'event_name');
 
 ### Subscriptions worker.
 
-- `php artisan queue:subscribe`
+- `php artisan queue:subscribe <connection>`
 
 > Note: To keep the queue:subscribe process running permanently in the background, 
 > you should use a process monitor such as Supervisor to ensure that the queue worker does not stop running.
