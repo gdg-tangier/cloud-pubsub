@@ -77,7 +77,7 @@ abstract class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Setup Pub/Sub env, creating the topic and the subscription
+     * Setup Pub/Sub env, creating the topic and the subscription.
      */
     public function setUpPubSub()
     {

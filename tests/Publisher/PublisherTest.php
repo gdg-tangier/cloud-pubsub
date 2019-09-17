@@ -2,8 +2,8 @@
 
 namespace GDGTangier\PubSub\Publisher;
 
-use GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound;
 use GDGTangier\PubSub\Publisher\Facades\PublisherFacade;
+use GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound;
 
 class PublisherTest extends \GDGTangier\PubSub\Tests\TestCase
 {
