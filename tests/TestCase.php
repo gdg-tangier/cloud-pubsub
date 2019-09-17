@@ -7,6 +7,12 @@ use GDGTangier\PubSub\Tests\Subscriber\SubscriptionJobs\SubscriberClass;
 
 abstract class TestCase extends OrchestraTestCase
 {
+    /** @var \Google\Cloud\PubSub\PubSubClient */
+    public $client;
+
+    /** @var \GDGTangier\PubSub\Publisher\Publisher */
+    public $publisher;
+
     /**
      * Topic name in pubsub.
      *
@@ -68,5 +74,26 @@ abstract class TestCase extends OrchestraTestCase
         $config = $this->app['config'];
 
         return $config;
+    }
+
+    /**
+     * Setup Pub/Sub env, creating the topic and the subscription
+     */
+    public function setUpPubSub()
+    {
+        $this->publisher = app('gcloud.publisher.connection');
+        $this->client = $this->publisher->getClient();
+        $this->publisher->getClient()->createTopic(self::TOPIC_NAME);
+        $this->publisher->getClient()->subscribe(self::SUBSCRIPTION_NAME, self::TOPIC_NAME);
+    }
+
+    /**
+     * Delete the Pub/Sub env. delete the topic and the subscription.
+     */
+    public function deletePubSub()
+    {
+        parent::tearDown();
+        $this->client->topic(self::TOPIC_NAME)->delete();
+        $this->client->subscription(self::SUBSCRIPTION_NAME)->delete();
     }
 }
