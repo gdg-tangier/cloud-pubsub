@@ -9,19 +9,9 @@ use GDGTangier\PubSub\Tests\Subscriber\SubscriptionJobs\SubscriberClass;
 class SubscriberTest extends \GDGTangier\PubSub\Tests\TestCase
 {
     /**
-     * @var \GDGTangier\PubSub\Publisher\Publisher
-     */
-    public $publisher;
-
-    /**
      * @var \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
     public $job;
-
-    /**
-     * @var \Google\Cloud\PubSub\PubSubClient
-     */
-    public $client;
 
     /**
      * Setup.
@@ -29,10 +19,7 @@ class SubscriberTest extends \GDGTangier\PubSub\Tests\TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->publisher = app('gcloud.publisher.connection');
-        $this->client = $this->publisher->getClient();
-        $this->publisher->getClient()->createTopic(self::TOPIC_NAME);
-        $this->publisher->getClient()->subscribe(self::SUBSCRIPTION_NAME, self::TOPIC_NAME);
+        $this->setUpPubSub();
     }
 
     /**
@@ -41,8 +28,7 @@ class SubscriberTest extends \GDGTangier\PubSub\Tests\TestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        $this->client->topic(self::TOPIC_NAME)->delete();
-        $this->client->subscription(self::SUBSCRIPTION_NAME)->delete();
+        $this->deletePubSub();
     }
 
     /**
