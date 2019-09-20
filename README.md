@@ -1,8 +1,13 @@
 ## Laravel Cloud Pub/Sub.
 
-<a href="https://imgur.com/XyPYNEt"><img src="https://i.imgur.com/XyPYNEt.jpg" title="source: imgur.com" /></a>
+<p align="center">
+<img src="https://i.imgur.com/XyPYNEt.jpg"/>
+</p>
+
+<p align="center"> 
 <img src="https://travis-ci.org/gdg-tangier/cloud-pubsub.svg?branch=master">
 <img src="https://github.styleci.io/repos/206420540/shield?branch=master">
+</p>
 
 ### Why?
 
