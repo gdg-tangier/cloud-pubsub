@@ -1,6 +1,6 @@
 {
     "name": "gdg-tangier/cloud-pubsub",
-    "description": "Google Cloud Pub/Sub for laravel",
+    "description": "Google Cloud pub-sub for laravel",
     "keywords": [
         "GDG",
         "php",
@@ -15,8 +15,10 @@
         "event driven",
         "laravel queue",
         "microservices",
-        "laravel Pub/Sub",
-        "Google Cloud Pub/Sub",
+        "laravel pub-sub",
+        "laravel pubsub",
+        "Google Cloud pub-sub",
+        "Google Cloud pubsub",
         "Google Cloud Platform",
         "Google Developer Group",
         "event driven microservices",
