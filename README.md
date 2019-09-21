@@ -7,6 +7,9 @@
 <p align="center"> 
 <img src="https://travis-ci.org/gdg-tangier/cloud-pubsub.svg?branch=master">
 <img src="https://github.styleci.io/repos/206420540/shield?branch=master">
+<img src="https://poser.pugx.org/gdg-tangier/cloud-pubsub/v/stable.svg">
+<img src="https://poser.pugx.org/gdg-tangier/cloud-pubsub/license.svg">
+<img src="https://img.shields.io/badge/built%20for-laravel-blue.svg">    
 </p>
 
 ### Why?
