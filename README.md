@@ -14,8 +14,8 @@
 
 ### Why?
 
-Build a scalable laravel app using event-driven microservices architecture (Pub/Sub), 
-this tool adds the ability for your laravel applications to communicate with each other using 
+Build a scalable Laravel apps using event-driven microservices architecture (Pub/Sub), 
+this tool adds the ability for your Laravel applications to communicate with each other using 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs).
 
 ### Define your architecture.
