@@ -7,10 +7,18 @@ use GDGTangier\PubSub\Tests\Subscriber\SubscriptionJobs\SubscriberClass;
 
 abstract class TestCase extends OrchestraTestCase
 {
-    /** @var \Google\Cloud\PubSub\PubSubClient */
+    /**
+     * The underlying PubSub client.
+     *
+     * @var \Google\Cloud\PubSub\PubSubClient
+     */
     public $client;
 
-    /** @var \GDGTangier\PubSub\Publisher\Publisher */
+    /**
+     * The underlying publisher instance.
+     *
+     * @var \GDGTangier\PubSub\Publisher\Publisher
+     */
     public $publisher;
 
     /**
@@ -28,6 +36,8 @@ abstract class TestCase extends OrchestraTestCase
     const SUBSCRIPTION_NAME = 'testPull';
 
     /**
+     * Get package aliases.
+     *
      * @param \Illuminate\Foundation\Application $app
      *
      * @return array
@@ -40,6 +50,8 @@ abstract class TestCase extends OrchestraTestCase
     }
 
     /**
+     * Get package providers.
+     *
      * @param \Illuminate\Foundation\Application $app
      *
      * @return array
@@ -66,6 +78,8 @@ abstract class TestCase extends OrchestraTestCase
     }
 
     /**
+     * Get configuration.
+     *
      * @return \Illuminate\Config\Repository
      */
     public function getConfig()
@@ -78,6 +92,8 @@ abstract class TestCase extends OrchestraTestCase
 
     /**
      * Setup Pub/Sub env, creating the topic and the subscription.
+     *
+     * @return void
      */
     public function setUpPubSub()
     {
@@ -89,6 +105,8 @@ abstract class TestCase extends OrchestraTestCase
 
     /**
      * Delete the Pub/Sub env. delete the topic and the subscription.
+     *
+     * @return void
      */
     public function deletePubSub()
     {
