@@ -14,8 +14,8 @@
 
 ### Why?
 
-Build a scalable laravel app using event-driven microservices architecture (Pub/Sub), 
-this tool adds the ability for your laravel applications to communicate with each other using 
+Build a scalable Laravel apps using event-driven microservices architecture (Pub/Sub), 
+this tool adds the ability for your Laravel applications to communicate with each other using 
 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/docs).
 
 ### Define your architecture.
@@ -165,7 +165,7 @@ $publisher->publish('MyDaya', 'event_name');
 
 ### Subscriptions worker.
 
-- `php artisan queue:subscribe <connection>`
+- `php artisan pubsub:subscribe <connection>`
 
 > Note: To keep the queue:subscribe process running permanently in the background, 
 > you should use a process monitor such as Supervisor to ensure that the queue worker does not stop running.
