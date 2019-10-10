@@ -121,7 +121,7 @@ class SubscriberQueue extends Queue implements QueueContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob|void
      */
-    protected function processMessages($queue, $messages): ?SubscriberJob
+    protected function processMessages($queue, $messages)
     {
         // First we need to pipe the messages through the pipeline.
         $message = $this->pipe($messages);
