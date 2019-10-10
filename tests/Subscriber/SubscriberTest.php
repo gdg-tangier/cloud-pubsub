@@ -49,7 +49,7 @@ class SubscriberTest extends \GDGTangier\PubSub\Tests\TestCase
         self::assertNotNull($this->job);
         self::assertInstanceOf(SubscriberJob::class, $this->job);
 
-        /** @var \GDGTangier\PubSub\Tests\Subscribers\SubscriberClass|null $subscriberInstance */
+        /** @var \GDGTangier\PubSub\Tests\Subscriber\SubscriptionJobs\SubscriberClass|null $subscriberInstance */
         $subscriberInstance = $this->job->getResolvedInstance();
 
         self::assertNotNull($subscriberInstance);
