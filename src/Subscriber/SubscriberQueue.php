@@ -3,7 +3,6 @@
 namespace GDGTangier\PubSub\Subscriber;
 
 use Illuminate\Queue\Queue;
-use Google\Cloud\PubSub\Message;
 use Illuminate\Pipeline\Pipeline;
 use Google\Cloud\PubSub\PubSubClient;
 use GDGTangier\PubSub\Subscriber\Pipeline\GetMessage;
@@ -55,8 +54,8 @@ class SubscriberQueue extends Queue implements QueueContract
      * Push a new job onto the queue.
      *
      * @param string|object $job
-     * @param mixed $data
-     * @param string $queue
+     * @param mixed         $data
+     * @param string        $queue
      *
      * @return mixed
      */
@@ -70,7 +69,7 @@ class SubscriberQueue extends Queue implements QueueContract
      *
      * @param string $payload
      * @param string $queue
-     * @param array $options
+     * @param array  $options
      *
      * @return mixed
      */
@@ -83,9 +82,9 @@ class SubscriberQueue extends Queue implements QueueContract
      * Push a new job onto the queue after a delay.
      *
      * @param \DateTimeInterface|\DateInterval|int $delay
-     * @param string|object $job
-     * @param mixed $data
-     * @param string $queue
+     * @param string|object                        $job
+     * @param mixed                                $data
+     * @param string                               $queue
      *
      * @return mixed
      */
@@ -99,8 +98,9 @@ class SubscriberQueue extends Queue implements QueueContract
      *
      * @param string $queue
      *
-     * @return \Illuminate\Contracts\Queue\Job|null
      * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
+     *
+     * @return \Illuminate\Contracts\Queue\Job|null
      */
     public function pop($queue = null)
     {
@@ -117,8 +117,9 @@ class SubscriberQueue extends Queue implements QueueContract
      * @param $queue
      * @param $messages
      *
-     * @return \GDGTangier\PubSub\Subscriber\SubscriberJob|void
      * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
+     *
+     * @return \GDGTangier\PubSub\Subscriber\SubscriberJob|void
      */
     protected function processMessages($queue, $messages): ?SubscriberJob
     {

@@ -63,8 +63,9 @@ class SubscriberJob extends Job implements JobContract
     /**
      * Fire the Job.
      *
-     * @return void
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return void
      */
     public function fire(): void
     {
@@ -117,8 +118,9 @@ class SubscriberJob extends Job implements JobContract
     /**
      * Get the number of times the job has been attempted.
      *
-     * @return int
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     *
+     * @return int
      */
     public function attempts(): int
     {
@@ -170,7 +172,7 @@ class SubscriberJob extends Job implements JobContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setMessage(Message $message): SubscriberJob
+    public function setMessage(Message $message): self
     {
         $this->message = $message;
 
@@ -184,9 +186,10 @@ class SubscriberJob extends Job implements JobContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setClient(PubSubClient $client): SubscriberJob
+    public function setClient(PubSubClient $client): self
     {
         $this->client = $client;
+
         return $this;
     }
 
@@ -197,7 +200,7 @@ class SubscriberJob extends Job implements JobContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setContainer(Container $container): SubscriberJob
+    public function setContainer(Container $container): self
     {
         $this->container = $container;
 
@@ -211,7 +214,7 @@ class SubscriberJob extends Job implements JobContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setConnectionName(string $connectionName): SubscriberJob
+    public function setConnectionName(string $connectionName): self
     {
         $this->connectionName = $connectionName;
 
@@ -225,7 +228,7 @@ class SubscriberJob extends Job implements JobContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setQueue(string $queue): SubscriberJob
+    public function setQueue(string $queue): self
     {
         $this->queue = $queue;
 
@@ -239,7 +242,7 @@ class SubscriberJob extends Job implements JobContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setHandler(string $handler): SubscriberJob
+    public function setHandler(string $handler): self
     {
         $this->handler = $handler;
 
@@ -253,7 +256,7 @@ class SubscriberJob extends Job implements JobContract
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setCache(Repository $cache): SubscriberJob
+    public function setCache(Repository $cache): self
     {
         $this->cache = $cache;
 
