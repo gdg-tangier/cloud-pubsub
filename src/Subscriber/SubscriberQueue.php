@@ -3,6 +3,7 @@
 namespace GDGTangier\PubSub\Subscriber;
 
 use Illuminate\Queue\Queue;
+use Google\Cloud\PubSub\Message;
 use Illuminate\Pipeline\Pipeline;
 use Google\Cloud\PubSub\PubSubClient;
 use GDGTangier\PubSub\Subscriber\Pipeline\GetMessage;
@@ -54,8 +55,8 @@ class SubscriberQueue extends Queue implements QueueContract
      * Push a new job onto the queue.
      *
      * @param string|object $job
-     * @param mixed         $data
-     * @param string        $queue
+     * @param mixed $data
+     * @param string $queue
      *
      * @return mixed
      */
@@ -69,7 +70,7 @@ class SubscriberQueue extends Queue implements QueueContract
      *
      * @param string $payload
      * @param string $queue
-     * @param array  $options
+     * @param array $options
      *
      * @return mixed
      */
@@ -82,9 +83,9 @@ class SubscriberQueue extends Queue implements QueueContract
      * Push a new job onto the queue after a delay.
      *
      * @param \DateTimeInterface|\DateInterval|int $delay
-     * @param string|object                        $job
-     * @param mixed                                $data
-     * @param string                               $queue
+     * @param string|object $job
+     * @param mixed $data
+     * @param string $queue
      *
      * @return mixed
      */
@@ -98,9 +99,8 @@ class SubscriberQueue extends Queue implements QueueContract
      *
      * @param string $queue
      *
-     * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
-     *
      * @return \Illuminate\Contracts\Queue\Job|null
+     * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
      */
     public function pop($queue = null)
     {
@@ -117,12 +117,12 @@ class SubscriberQueue extends Queue implements QueueContract
      * @param $queue
      * @param $messages
      *
+     * @return \GDGTangier\PubSub\Subscriber\SubscriberJob|void
      * @throws \GDGTangier\PubSub\Subscriber\Exceptions\SubscriberJobNotFound
-     *
-     * @return \GDGTangier\PubSub\Subscriber\SubscriberJob|null
      */
-    protected function processMessages($queue, $messages)
+    protected function processMessages($queue, $messages): ?SubscriberJob
     {
+        // First we need to pipe the messages through the pipeline.
         $message = $this->pipe($messages);
 
         if (is_null($message)) {
@@ -132,15 +132,19 @@ class SubscriberQueue extends Queue implements QueueContract
         /** @var \GDGTangier\PubSub\Subscriber\JobsMap $map */
         $map = app('gcloud.subscriber.map');
 
+        // Extract the job handler from the topic name.
         $handler = $map->fromTopic($message->attributes()['TopicName']);
 
-        return new SubscriberJob(
-            $message,
-            $this->client,
-            $this->container,
-            $this->connectionName,
-            $queue,
-            $handler);
+        $cache = $this->container->get('cache');
+
+        return (new SubscriberJob())
+            ->setMessage($message)
+            ->setClient($this->client)
+            ->setContainer($this->container)
+            ->setConnectionName($this->connectionName)
+            ->setQueue($queue)
+            ->setCache($cache)
+            ->setHandler($handler);
     }
 
     /**
