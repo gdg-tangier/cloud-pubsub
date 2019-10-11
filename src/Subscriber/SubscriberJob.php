@@ -4,8 +4,8 @@ namespace GDGTangier\PubSub\Subscriber;
 
 use Illuminate\Queue\Jobs\Job;
 use Google\Cloud\PubSub\Message;
+use Illuminate\Cache\CacheManager;
 use Google\Cloud\PubSub\PubSubClient;
-use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Queue\Job as JobContract;
 
@@ -24,27 +24,6 @@ class SubscriberJob extends Job implements JobContract
      * @var \Google\Cloud\PubSub\PubSubClient
      */
     protected $client;
-
-    /**
-     * The underlying application container.
-     *
-     * @var \Illuminate\Container\Container
-     */
-    protected $container;
-
-    /**
-     * Queue Connection.
-     *
-     * @var string
-     */
-    protected $connectionName;
-
-    /**
-     * Queue.
-     *
-     * @var string
-     */
-    protected $queue;
 
     /**
      * Job Handler.
@@ -196,7 +175,7 @@ class SubscriberJob extends Job implements JobContract
     /**
      * Set the underlying container.
      *
-     * @param \Illuminate\Container\Container $container
+     * @param \Illuminate\Contracts\Container\Container $container
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
@@ -252,11 +231,11 @@ class SubscriberJob extends Job implements JobContract
     /**
      * Set the cache instance.
      *
-     * @param \Illuminate\Contracts\Cache\Repository $cache
+     * @param \Illuminate\Cache\CacheManager $cache
      *
      * @return \GDGTangier\PubSub\Subscriber\SubscriberJob
      */
-    public function setCache(Repository $cache): self
+    public function setCache(CacheManager $cache): self
     {
         $this->cache = $cache;
 
