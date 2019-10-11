@@ -136,6 +136,7 @@ class SubscriberQueue extends Queue implements QueueContract
         // Extract the job handler from the topic name.
         $handler = $map->fromTopic($message->attributes()['TopicName']);
 
+        /** @var \Illuminate\Cache\CacheManager $cache */
         $cache = $this->container->get('cache');
 
         return (new SubscriberJob())
