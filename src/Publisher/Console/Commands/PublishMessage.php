@@ -54,6 +54,7 @@ class PublishMessage extends Command
             $bar->advance();
         } catch (TopicNotFound $e) {
             $this->error($e->getMessage());
+            exit(1);
         }
 
         $bar->finish();
