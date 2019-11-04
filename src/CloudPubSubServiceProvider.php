@@ -2,6 +2,7 @@
 
 namespace GDGTangier\PubSub;
 
+use GDGTangier\PubSub\Console\StartEmulator;
 use Illuminate\Support\ServiceProvider;
 use GDGTangier\PubSub\Console\ListPubSubEventsCommand;
 use GDGTangier\PubSub\Console\ListSubscriptionsCommand;
@@ -18,7 +19,11 @@ class CloudPubSubServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishConfig();
-        $this->commands([ListPubSubEventsCommand::class, ListSubscriptionsCommand::class]);
+        $this->commands([
+            StartEmulator::class,
+            ListPubSubEventsCommand::class,
+            ListSubscriptionsCommand::class,
+        ]);
     }
 
     /**
@@ -39,7 +44,7 @@ class CloudPubSubServiceProvider extends ServiceProvider
      */
     protected function publishConfig()
     {
-        $configPath = __DIR__.'/../config/pubsub.php';
+        $configPath = __DIR__ . '/../config/pubsub.php';
         $this->publishes([
             $configPath => config_path('pubsub.php'),
         ], 'pubsub');
