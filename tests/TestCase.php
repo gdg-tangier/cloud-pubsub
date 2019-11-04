@@ -2,6 +2,7 @@
 
 namespace GDGTangier\PubSub\Tests;
 
+use GDGTangier\PubSub\PubSub;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use GDGTangier\PubSub\Tests\Subscriber\SubscriptionJobs\SubscriberClass;
 
@@ -97,6 +98,7 @@ abstract class TestCase extends OrchestraTestCase
      */
     public function setUpPubSub()
     {
+        PubSub::useEmulatorCredentials();
         $this->publisher = app('gcloud.publisher.connection');
         $this->client = $this->publisher->getClient();
         $this->publisher->getClient()->createTopic(self::TOPIC_NAME);
