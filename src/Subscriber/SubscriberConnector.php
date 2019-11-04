@@ -3,6 +3,7 @@
 namespace GDGTangier\PubSub\Subscriber;
 
 use Illuminate\Support\Arr;
+use GDGTangier\PubSub\PubSub;
 use Google\Cloud\PubSub\PubSubClient;
 use Illuminate\Queue\Connectors\ConnectorInterface;
 
@@ -17,9 +18,24 @@ class SubscriberConnector implements ConnectorInterface
      */
     public function connect(array $config)
     {
-        $config = getenv('PUBSUB_EMULATOR_HOST') ? [] :
-            Arr::only($config['credentials'], ['keyFilePath', 'projectId']);
+        $pubusbConfig = $this->getPubSubConfig();
 
-        return new SubscriberQueue(new PubSubClient($config));
+        $credentials = PubSub::$runsEmulator ? [] :
+            Arr::only($pubusbConfig['credentials'], ['keyFilePath', 'projectId']);
+
+        return new SubscriberQueue(new PubSubClient($credentials));
+    }
+
+    /**
+     * Get PubSub Configuration.
+     *
+     * @return array
+     */
+    protected function getPubSubConfig()
+    {
+        /** @var array $config */
+        $config = app()['config']['pubsub'];
+
+        return $config;
     }
 }
