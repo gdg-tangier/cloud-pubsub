@@ -39,12 +39,12 @@ class StartEmulator extends Command
     {
         if (!getenv('PUBSUB_EMULATOR_HOST')) {
             $this->error('Cannot start emulator, please export the emulator host, try [export PUBSUB_EMULATOR_HOST=localhost:8085]');
+
             return;
         }
 
         $this->info('PUBSUB_EMULATOR_HOST: checked');
 
-        exec(__dir__.'/../../emulator.sh');
+        exec(__DIR__.'/../../emulator.sh');
     }
 }
-
