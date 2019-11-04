@@ -3,6 +3,7 @@
 namespace GDGTangier\PubSub\Publisher;
 
 use Illuminate\Support\Arr;
+use GDGTangier\PubSub\PubSub;
 use Google\Cloud\PubSub\PubSubClient;
 
 class PublisherConnector
@@ -16,7 +17,7 @@ class PublisherConnector
      */
     public function connect($config)
     {
-        $credentials = getenv('PUBSUB_EMULATOR_HOST') ? [] :
+        $credentials = PubSub::$runsEmulator ? [] :
             Arr::only($config['credentials'], ['keyFilePath', 'projectId']);
 
         return new Publisher(new PubSubClient($credentials), new EventsMap($config['events']));
