@@ -156,7 +156,7 @@ PublisherFacede::publish('MyData', 'event_name');
 ```php
 $publisher = app('gcloud.publisher.connection');
 
-$publisher->publish('MyDaya', 'event_name');
+$publisher->publish('MyData', 'event_name');
 ```
 
 - Using artisan command.
