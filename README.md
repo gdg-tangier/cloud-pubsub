@@ -172,6 +172,18 @@ Or alternatively you can run `php artisan queue:work <connection>`
 > Note: To keep the queue:subscribe process running permanently in the background, 
 > you should use a process monitor such as [supervisor](http://supervisord.org) to ensure that the queue worker does not stop running.
 
+### Using GCP Pub/Sub emulator.
+
+You need to install [GCP command line tool](https://cloud.google.com/sdk/gcloud/) and **Setup Topics/Subscriptions**
+
+To use the emulator:
+
+1. Go to the `AppServiceProvider@register` and add `PubSub::useEmulatorCredentials()`
+
+2. Export the pubsub emulator host `export PUBSUB_EMULATOR_HOST=localhost:8085`
+
+3. Run the emulator, `php artisan pubsub:emulator`
+
 ### Testing.
 
 You need to install [GCP command line tool](https://cloud.google.com/sdk/gcloud/).
