@@ -148,7 +148,7 @@ class UserUpdated
 ```php
 use GDGTangier\PubSub\Publisher\Facades\PublisherFacade;
 
-PublisherFacede::publish('MyData', 'event_name');
+PublisherFacade::publish('MyData', 'event_name');
 ```
 
 - Using service container.
