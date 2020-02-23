@@ -53,8 +53,9 @@ class PublishMessage extends Command
             $publisher->publish($message, $event);
             $bar->advance();
         } catch (TopicNotFound $e) {
-            $this->error($e->getMessage());
-            exit(1);
+            $this->logAndExit($e->getMessage());
+        } catch (\Exception $e) {
+            $this->logAndExit($e->getMessage());
         }
 
         $bar->finish();
@@ -72,5 +73,18 @@ class PublishMessage extends Command
         $bar->setProgressCharacter("\xF0\x9F\x9A\x80");
 
         return $bar;
+    }
+
+    /**
+     * Log the exception message and force exit.
+     *
+     * @param $message
+     *
+     * @return void
+     */
+    protected function logAndExit($message)
+    {
+        $this->error($message);
+        exit(1);
     }
 }
