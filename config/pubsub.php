@@ -28,4 +28,9 @@ return [
     'subscriptions'        => [
         \App\PubSub\DummyJob::class => '__YOUR_TOPIC_NAME__',
     ],
+
+    /*
+     * Here where you can specify if you want to acknowledge messages back when the jobs failed.
+     */
+    'acknowledge_if_failed' => true,
 ];
