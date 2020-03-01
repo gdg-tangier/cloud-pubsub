@@ -142,7 +142,8 @@ class SubscriberJob extends Job implements JobContract
     /**
      * Delete the job, call the "failed" method, and raise the failed job event.
      *
-     * @param  \Throwable|null  $e
+     * @param \Throwable|null $e
+     *
      * @return void
      */
     public function fail($e = null)
@@ -154,17 +155,15 @@ class SubscriberJob extends Job implements JobContract
         }
 
         try {
-
             if (config('pubsub.acknowledge_if_failed')) {
                 $this->delete();
             }
 
             $this->failed($e);
-
         } finally {
             $this->cache->forget($this->message->id());
             $this->resolve(Dispatcher::class)->dispatch(new JobFailed(
-                $this->connectionName, $this, $e ?: new ManuallyFailedException
+                $this->connectionName, $this, $e ?: new ManuallyFailedException()
             ));
         }
     }
