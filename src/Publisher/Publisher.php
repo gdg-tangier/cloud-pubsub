@@ -33,8 +33,8 @@ class Publisher
     /**
      * Publish data to the cloud.
      *
-     * @param string $data publishable data.
-     * @param string $event event or topic name
+     * @param string $data       publishable data.
+     * @param string $event      event or topic name
      * @param array  $attributes additional attributes.
      *
      * @throws \GDGTangier\PubSub\Publisher\Exceptions\TopicNotFound
