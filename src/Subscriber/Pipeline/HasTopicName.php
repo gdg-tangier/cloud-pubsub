@@ -14,7 +14,7 @@ class HasTopicName
      */
     public function handle($message, \Closure $next)
     {
-        if (!$message->attributes()['TopicName']) {
+        if (!array_key_exists('TopicName', $message->attributes())) {
             return;
         }
 
