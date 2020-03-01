@@ -6,7 +6,10 @@ use Illuminate\Queue\Jobs\Job;
 use Google\Cloud\PubSub\Message;
 use Illuminate\Cache\CacheManager;
 use Google\Cloud\PubSub\PubSubClient;
+use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Queue\ManuallyFailedException;
 use Illuminate\Contracts\Queue\Job as JobContract;
 
 class SubscriberJob extends Job implements JobContract
@@ -134,6 +137,36 @@ class SubscriberJob extends Job implements JobContract
             'data' => $this->getRawBody(),
             'job'  => $this->handler,
         ];
+    }
+
+    /**
+     * Delete the job, call the "failed" method, and raise the failed job event.
+     *
+     * @param  \Throwable|null  $e
+     * @return void
+     */
+    public function fail($e = null)
+    {
+        $this->markAsFailed();
+
+        if ($this->isDeleted()) {
+            return;
+        }
+
+        try {
+
+            if (config('pubsub.acknowledge_if_failed')) {
+                $this->delete();
+            }
+
+            $this->failed($e);
+
+        } finally {
+            $this->cache->forget($this->message->id());
+            $this->resolve(Dispatcher::class)->dispatch(new JobFailed(
+                $this->connectionName, $this, $e ?: new ManuallyFailedException
+            ));
+        }
     }
 
     /**
