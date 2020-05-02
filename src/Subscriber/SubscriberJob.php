@@ -53,7 +53,8 @@ class SubscriberJob extends Job implements JobContract
     {
         $payload = $this->payload();
 
-        $this->instance = ($this->container->make($payload['job'],
+        $this->instance = ($this->container->make(
+            $payload['job'],
             [
                 'job'     => $this,
                 'payload' => $payload['data'],
@@ -163,7 +164,9 @@ class SubscriberJob extends Job implements JobContract
         } finally {
             $this->cache->forget($this->message->id());
             $this->resolve(Dispatcher::class)->dispatch(new JobFailed(
-                $this->connectionName, $this, $e ?: new ManuallyFailedException()
+                $this->connectionName,
+                $this,
+                $e ?: new ManuallyFailedException()
             ));
         }
     }
