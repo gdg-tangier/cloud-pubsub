@@ -20,37 +20,40 @@ jobs:
           - "7.1"
           - "7.2"
           - "8.1"
-      
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v0
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-    - name: Gcloud version
-      run: gcloud --version
+      - name: Gcloud version
+        run: gcloud --version
 
-    - name: Run gcloud emulators
-      run: gcloud beta emulators pubsub start --project=gdgtangier-23412 &> /dev/null &
-      
-    - name: Export emulator url
-      run: export PUBSUB_EMULATOR_HOST=localhost:8085
-      
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
-      
-    - name: run tests
-      run: vendor/bin/phpunit
+      - name: Run gcloud emulators
+        run: gcloud beta emulators pubsub start --project=gdgtangier-23412 &> /dev/null &
+
+      - name: Export emulator url
+        run: export PUBSUB_EMULATOR_HOST=localhost:8085
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: EMULATOR_HOST
+        run: echo $PUBSUB_EMULATOR_HOST
+
+      - name: run tests
+        run: vendor/bin/phpunit
     
