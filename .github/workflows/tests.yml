@@ -43,7 +43,7 @@ jobs:
       run: gcloud --version
 
     - name: Run gcloud emulators
-      run: gcloud beta emulators pubsub start &> /dev/null &
+      run: gcloud beta emulators pubsub start --project=gdgtangier-23412 &> /dev/null &
       
     - name: Export emulator url
       run: export PUBSUB_EMULATOR_HOST=localhost:8085
