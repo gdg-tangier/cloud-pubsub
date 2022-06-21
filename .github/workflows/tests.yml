@@ -46,13 +46,13 @@ jobs:
         run: gcloud --version
 
       - name: Run gcloud emulators
-        run: gcloud beta emulators pubsub start --project=gdgtangier-23412
+        run: gcloud beta emulators pubsub start --project=gdgtangier-23412 --quiet
 
-#      - name: Install dependencies
-#        run: composer install --prefer-dist --no-progress
-#
-#      - name: EMULATOR_HOST
-#        run: echo $PUBSUB_EMULATOR_HOST
-#
-#      - name: run tests
-#        run: vendor/bin/phpunit
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: EMULATOR_HOST
+        run: echo $PUBSUB_EMULATOR_HOST
+
+      - name: run tests
+        run: vendor/bin/phpunit
