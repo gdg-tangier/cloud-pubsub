@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  PUBSUB_EMULATOR_HOST: localhost:8085
+
 permissions:
   contents: read
 
@@ -45,9 +48,6 @@ jobs:
       - name: Run gcloud emulators
         run: gcloud beta emulators pubsub start --project=gdgtangier-23412 &> /dev/null &
 
-      - name: Export emulator url
-        run: export PUBSUB_EMULATOR_HOST=localhost:8085
-
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
@@ -56,4 +56,3 @@ jobs:
 
       - name: run tests
         run: vendor/bin/phpunit
-    
