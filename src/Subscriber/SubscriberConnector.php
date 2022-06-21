@@ -20,7 +20,7 @@ class SubscriberConnector implements ConnectorInterface
     {
         $pubusbConfig = $this->getPubSubConfig();
 
-        $credentials = PubSub::$runsEmulator ? [] :
+        $credentials = PubSub::$runsEmulator ? ['projectId' => 'gdgtangier-23412'] :
             Arr::only($pubusbConfig['credentials'], ['keyFilePath', 'projectId']);
 
         return new SubscriberQueue(new PubSubClient($credentials));
