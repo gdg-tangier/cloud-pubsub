@@ -17,7 +17,7 @@ class PublisherConnector
      */
     public function connect($config)
     {
-        $credentials = PubSub::$runsEmulator ? [] :
+        $credentials = PubSub::$runsEmulator ? ['projectId' => 'gdgtangier-23412'] :
             Arr::only($config['credentials'], ['keyFilePath', 'projectId']);
 
         return new Publisher(new PubSubClient($credentials), new EventsMap($config['events']));
