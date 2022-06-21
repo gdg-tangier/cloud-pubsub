@@ -32,10 +32,10 @@
         }
     ],
     "require": {
-        "google/cloud-pubsub": "^1.16"
+        "google/cloud-pubsub": "^1.38"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.8"
+        "orchestra/testbench": "^7.5"
     },
     "autoload": {
         "psr-4": {
