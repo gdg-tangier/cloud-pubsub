@@ -30,7 +30,7 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
         with:
-          install_components: 'beta,cloud-datastore-emulator'
+          install_components: 'beta'
           
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -48,7 +48,10 @@ jobs:
         run: gcloud --version
 
       - name: Run gcloud emulators
-        run: gcloud beta emulators pubsub start --project=gdgtangier-23412 --quiet
+        run: gcloud beta emulators pubsub start --project=gdgtangier-23412 --quiet > /dev/null 2>&1 & 
+        
+      - name: Sleep for 1 min.
+        run: sleep 60
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
