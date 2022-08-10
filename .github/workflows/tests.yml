@@ -29,7 +29,9 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
-
+        with:
+          install_components: 'beta,cloud-datastore-emulator'
+          
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
 
