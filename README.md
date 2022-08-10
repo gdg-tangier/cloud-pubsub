@@ -5,7 +5,7 @@
 </p>
 
 <p align="center"> 
-<img src="https://travis-ci.org/gdg-tangier/cloud-pubsub.svg?branch=master">
+<img src="https://github.com/gdg-tangier/cloud-pubsub/actions/workflows/tests.yml/badge.svg">
 <img src="https://github.styleci.io/repos/206420540/shield?branch=master">
 <img src="https://poser.pugx.org/gdg-tangier/cloud-pubsub/v/stable.svg">
 <img src="https://poser.pugx.org/gdg-tangier/cloud-pubsub/license.svg">
